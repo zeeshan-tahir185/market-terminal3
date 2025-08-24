@@ -164,7 +164,7 @@ export default function BoardPage() {
       {/* Editor */}
       <div
         ref={editorContainerRef}
-        className="mx-auto w-full md:w-[359px] border border-[#E3E3E880] textarea_box_shadow rounded-[17px]"
+        className="mx-auto w-full md:w-[359px] border border-[#E3E3E880] textarea_box_shadow rounded-[10px] "
       >
         <ReactQuill
           ref={quillRef}
@@ -173,7 +173,7 @@ export default function BoardPage() {
           placeholder="📝 Write new journal..."
           modules={modules}
           formats={formats}
-          className={`!rounded-[17px] ${showToolbar ? "" : "toolbar-hidden"
+          className={`!rounded-[10px] ${showToolbar ? "" : "toolbar-hidden"
             } ${editorExpanded ? "expanded" : ""}`}
         />
       </div>

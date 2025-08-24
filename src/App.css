@@ -55,7 +55,6 @@
 .quill {
   display: flex;
   flex-direction: column-reverse;
-  padding: 8px !important;
   box-sizing: border-box;
 }
 
@@ -63,10 +62,15 @@
 .ql-editor {
   min-height: 40px;
   transition: min-height 0.3s ease;
-  padding: 8px !important;
   box-sizing: border-box;
 }
-
+.ql-editor::before{
+  margin-top: 6px;
+  font-size: 13px;
+  color: #9CA3AF !important;
+  font-style: normal !important;
+  
+}
 .expanded .ql-editor {
   min-height: 119px !important;
 }
