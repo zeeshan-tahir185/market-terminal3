@@ -33,9 +33,9 @@ export default function BoardPage() {
   useEffect(() => {
     if (quillRef.current) {
       const quill = quillRef.current.getEditor();
-      quill.format("size", "16px");
+      quill.format("size", "16px");  // Set font size to 16px on mount
     }
-  }, []);
+  }, [newNote]);
 
   // Remove auto-focus on mount
   useEffect(() => {
@@ -93,7 +93,6 @@ export default function BoardPage() {
       };
     }
   }, [newNote]);
-
   const addNote = () => {
     const cleaned = newNote.replace(/<(.|\n)*?>/g, "").trim();
     if (!cleaned) return; // empty mat save karo
@@ -104,11 +103,16 @@ export default function BoardPage() {
       createdAt: Date.now(),
     };
     setNotes([note, ...notes]);
+
+    // Reset the new note to have 16px font size
     setNewNote('<p style="font-size: 16px"><br></p>');
     setEditorExpanded(false); // collapse after saving
   };
 
+
   const handleEditorChange = (value) => {
+    const quill = quillRef.current.getEditor();
+    quill.format("size", "16px");  // Always set font size to 16px while typing
     setNewNote(value);
     if (value !== '<p style="font-size: 16px"><br></p>') {
       setShowToolbar(true);
