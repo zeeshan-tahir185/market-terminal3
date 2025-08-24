@@ -3,20 +3,44 @@ import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
+import { IoChevronBackOutline } from "react-icons/io5";
 
-// Register custom font sizes and background (same as BoardPage)
+// Register custom font sizes and background
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = [
-  "8px", "9px", "10px", "11px", "12px", "13px", "14px", "15px",
-  "16px", "18px", "20px", "22px", "24px", "26px", "28px", "32px",
-  "36px", "40px", "48px", "56px", "64px", "72px"
+  "8px",
+  "9px",
+  "10px",
+  "11px",
+  "12px",
+  "13px",
+  "14px",
+  "15px",
+  "16px",
+  "18px",
+  "20px",
+  "22px",
+  "24px",
+  "26px",
+  "28px",
+  "32px",
+  "36px",
+  "40px",
+  "48px",
+  "56px",
+  "64px",
+  "72px",
 ];
 Quill.register(Size, true);
 
 const Parchment = Quill.import("parchment");
-const BackgroundClass = new Parchment.Attributor.Style("background", "background-color", {
-  scope: Parchment.Scope.INLINE,
-});
+const BackgroundClass = new Parchment.Attributor.Style(
+  "background",
+  "background-color",
+  {
+    scope: Parchment.Scope.INLINE,
+  }
+);
 Quill.register(BackgroundClass, true);
 
 export default function NoteDetailPage() {
@@ -45,7 +69,9 @@ export default function NoteDetailPage() {
     if (cleaned) {
       const updatedNote = { ...note, html: value };
       const savedNotes = JSON.parse(localStorage.getItem("notes") || "[]");
-      const updatedNotes = savedNotes.map((n) => (n.id === id ? updatedNote : n));
+      const updatedNotes = savedNotes.map((n) =>
+        n.id === id ? updatedNote : n
+      );
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
     }
   };
@@ -60,13 +86,40 @@ export default function NoteDetailPage() {
 
   const modules = {
     toolbar: [
-      [{ color: [] }, { background: [] }, "bold", "italic", "underline", "strike", {
-        size: [
-          "8px", "9px", "10px", "11px", "12px", "13px", "14px", "15px",
-          "16px", "18px", "20px", "22px", "24px", "26px", "28px", "32px",
-          "36px", "40px", "48px", "56px", "64px", "72px",
-        ],
-      }],
+      [
+        { color: [] },
+        { background: [] },
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        {
+          size: [
+            "8px",
+            "9px",
+            "10px",
+            "11px",
+            "12px",
+            "13px",
+            "14px",
+            "15px",
+            "16px",
+            "18px",
+            "20px",
+            "22px",
+            "24px",
+            "26px",
+            "28px",
+            "32px",
+            "36px",
+            "40px",
+            "48px",
+            "56px",
+            "64px",
+            "72px",
+          ],
+        },
+      ],
       [{ align: "" }, { align: "center" }, { align: "right" }],
     ],
   };
@@ -83,29 +136,32 @@ export default function NoteDetailPage() {
   ];
 
   return (
-    <div className="md:w-[560px] min-h-[736px] p-5 m-2 flex flex-col gap-[21px] rounded-[7px] bg-white border border-[#E5E5E7]">
-      {/* Back Button */}
-      <button
-        onClick={() => navigate("/")}
-        className="text-sm text-[#000000] opacity-70 mb-4"
-      >
-        ← Back to Notes
-      </button>
+    <div className="page-content">
+      <div className="md:w-[560px] min-h-[calc(100vh-20px)] px-[10px] pt-[10px] m-2 flex flex-col rounded-[7px] bg-white border border-[#E5E5E7]">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate("/")}
+          className="text-sm text-[#000000] opacity-70 mb-4 flex justify-start items-center"
+        >
+          <IoChevronBackOutline />
+          Home
+        </button>
 
-      {/* Editor */}
-      {note && (
-        <div className="mx-auto w-full md:w-[359px] border border-[#E3E3E880] textarea_box_shadow rounded-[10px]">
-          <ReactQuill
-            ref={quillRef}
-            value={noteHtml}
-            onChange={handleEditorChange}
-            placeholder="Edit your note..."
-            modules={modules}
-            formats={formats}
-            className="!rounded-[10px]"
-          />
-        </div>
-      )}
+        {/* Editor */}
+        {note && (
+          <div className="mx-auto w-full custom_detail_page h-[calc(100vh-70px)]">
+            <ReactQuill
+              ref={quillRef}
+              value={noteHtml}
+              onChange={handleEditorChange}
+              placeholder="Edit your note..."
+              modules={modules}
+              formats={formats}
+              className="!rounded-[10px] h-full"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

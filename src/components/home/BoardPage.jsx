@@ -275,7 +275,8 @@ export default function BoardPage() {
     n.html.toLowerCase().includes(query.toLowerCase())
   );
 
-  return (
+ return (
+  <div className="page-content">
     <div className="md:w-[560px] min-h-[736px] p-5 m-2 flex flex-col gap-[21px] rounded-[7px] bg-white border border-[#E5E5E7]">
       {/* Search box */}
       <div className="flex items-center gap-[5px] text-[#000000] text-[13px]">
@@ -327,5 +328,6 @@ export default function BoardPage() {
         </DragOverlay>
       </DndContext>
     </div>
-  );
+  </div>
+);
 }

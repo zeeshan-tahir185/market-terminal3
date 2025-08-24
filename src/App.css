@@ -1,25 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
+
 .textarea_box_shadow {
   box-shadow: 0px 0px 20px 0px rgba(170, 170, 170, 0.15);
 }
+
 .custom_letter_space {
   letter-spacing: 0.1px;
 }
+
 .notes_custom_shadow {
   box-shadow: 0px 0px 40px 0px rgba(162, 162, 162, 0.15);
 }
-
-
-
-
-
 
 .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item::before {
@@ -58,36 +57,32 @@
   flex-direction: column-reverse;
   box-sizing: border-box;
 }
-
+.custom_detail_page .quill{
+  justify-content: space-between;
+}
 
 .ql-editor {
   min-height: 40px;
   transition: min-height 0.3s ease;
   box-sizing: border-box;
 }
-.ql-editor::before{
+
+.ql-editor::before {
   margin-top: 6px;
   font-size: 13px;
   color: #9CA3AF !important;
   font-style: normal !important;
-  
-}
-.expanded .ql-editor {
-  min-height: 119px !important;
-}
-
-
-.ql-editor::before {
   left: 8px !important;
   top: 8px !important;
   color: #000000;
   opacity: 0.7;
 }
 
+.expanded .ql-editor {
+  min-height: 119px !important;
+}
 
-
-/* dragging notes css  */
-/* Note card styles */
+/* Dragging notes CSS */
 .note-card {
   border-radius: 12px;
   padding: 10px;
@@ -101,7 +96,6 @@
   cursor: pointer;
 }
 
-/* Drag overlay styles (the note that follows the cursor) */
 .note-card.drag-overlay {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for "floating" */
   transform: scale(1.05); /* Slight scale for emphasis */
@@ -116,3 +110,9 @@
   gap: 14px;
 }
 
+
+
+.page-content {
+  width: 100%;
+  max-width: 560px; /* Matches your md:w-[560px] */
+}
