@@ -39,8 +39,10 @@
   transition: opacity 0.3s ease;
   border-top: 1px solid #e3e3e8bf !important;
   display: flex;
+  gap: -20px !important;
   justify-content: space-between !important;
   padding: 5px 0px !important;
+  margin: 0px 10px;
 }
 
 .toolbar-hidden .ql-toolbar {
@@ -73,11 +75,6 @@
 }
 .expanded .ql-editor {
   min-height: 119px !important;
-}
-
-
-.custom_textarea{
-  border: 10px solid red !important;
 }
 
 
