@@ -1,17 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+* {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-
+  font-family: "Inter", sans-serif;
+  word-wrap: break-word; 
 }
 .textarea_box_shadow {
   box-shadow: 0px 0px 20px 0px rgba(170, 170, 170, 0.15);
 }
-.custom_letter_space{
+.custom_letter_space {
   letter-spacing: 0.1px;
 }
 .notes_custom_shadow {
   box-shadow: 0px 0px 40px 0px rgba(162, 162, 162, 0.15);
+}
+
+
+
+
+
+
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: attr(data-value) !important;
+}
+
+.ql-snow .ql-picker.ql-size {
+  width: 60px;
+}
+
+.ql-formats {
+  margin: 0 !important;
+}
+
+.ql-toolbar {
+  border: none !important;
+  transition: opacity 0.3s ease;
+  border-top: 1px solid #e3e3e8bf !important;
+  display: flex;
+  justify-content: space-between !important;
+  padding: 5px 0px !important;
+}
+
+.toolbar-hidden .ql-toolbar {
+  display: none;
+}
+
+.ql-container {
+  border: none !important;
+  overflow: visible !important;
+}
+
+.quill {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 8px !important;
+  box-sizing: border-box;
+}
+
+
+.ql-editor {
+  min-height: 40px;
+  transition: min-height 0.3s ease;
+  padding: 8px !important;
+  box-sizing: border-box;
+}
+
+.expanded .ql-editor {
+  min-height: 119px !important;
+}
+
+
+.custom_textarea{
+  border: 10px solid red !important;
+}
+
+
+.ql-editor::before {
+  left: 8px !important;
+  top: 8px !important;
+  color: #000000;
+  opacity: 0.7;
 }
