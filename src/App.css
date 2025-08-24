@@ -39,7 +39,6 @@
   transition: opacity 0.3s ease;
   border-top: 1px solid #e3e3e8bf !important;
   display: flex;
-  gap: -20px !important;
   justify-content: space-between !important;
   padding: 5px 0px !important;
   margin: 0px 10px;
@@ -84,3 +83,36 @@
   color: #000000;
   opacity: 0.7;
 }
+
+
+
+/* dragging notes css  */
+/* Note card styles */
+.note-card {
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #E3E3E880;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Equivalent to notes_custom_shadow */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+/* Drag overlay styles (the note that follows the cursor) */
+.note-card.drag-overlay {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for "floating" */
+  transform: scale(1.05); /* Slight scale for emphasis */
+  z-index: 1000; /* Above all other elements */
+  opacity: 1; /* Solid, no blur or transparency */
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
