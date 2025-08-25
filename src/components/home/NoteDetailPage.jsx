@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { IoChevronBackOutline } from "react-icons/io5";
 
-// Register custom font sizes and background
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = [
   "8px",
@@ -46,11 +45,13 @@ Quill.register(BackgroundClass, true);
 export default function NoteDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const quillRef = useRef(null);
+  const location = useLocation();
   const [note, setNote] = useState(null);
   const [noteHtml, setNoteHtml] = useState("");
+  const quillRef = useRef(null);
+  const [animationClass, setAnimationClass] = useState("");
 
-  // Load note from localStorage
+  // Load the note from localStorage
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem("notes") || "[]");
     const foundNote = savedNotes.find((n) => n.id === id);
@@ -58,11 +59,11 @@ export default function NoteDetailPage() {
       setNote(foundNote);
       setNoteHtml(foundNote.html);
     } else {
-      navigate("/"); // Redirect if note not found
+      navigate("/"); // Redirect if the note is not found
     }
   }, [id, navigate]);
 
-  // Save note to localStorage on change
+  // Save the note to localStorage on change
   const handleEditorChange = (value) => {
     setNoteHtml(value);
     const cleaned = value.replace(/<(.|\n)*?>/g, "").trim();
@@ -75,14 +76,23 @@ export default function NoteDetailPage() {
       localStorage.setItem("notes", JSON.stringify(updatedNotes));
     }
   };
-
-  // Set default font size
+let navigateToHome=()=>{
+  setAnimationClass("detail-page-exit");
+          setTimeout(() => {
+            navigate("/");
+          }, 500);
+}
+  // Detect page transitions and apply the animation
   useEffect(() => {
-    if (quillRef.current) {
-      const quill = quillRef.current.getEditor();
-      quill.format("size", "16px");
+    // Only apply animation when navigating to the note detail page
+    if (location.pathname.includes(id)) {
+      setAnimationClass("detail-page-enter");
+    } else {
+      setAnimationClass("detail-page-exit");
     }
-  }, []);
+  }, [location, id]);
+
+  console.log("Animation Class: ", animationClass);
 
   const modules = {
     toolbar: [
@@ -136,32 +146,32 @@ export default function NoteDetailPage() {
   ];
 
   return (
-    <div className="page-content">
-      <div className="md:w-[560px] min-h-[calc(100vh-20px)] px-[10px] pt-[10px] m-2 flex flex-col rounded-[7px] bg-white border border-[#E5E5E7]">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate("/")}
-          className="text-sm text-[#000000] opacity-70 mb-4 flex justify-start items-center"
-        >
-          <IoChevronBackOutline />
-          Home
-        </button>
+    <div
+      className={`z- min-h-[calc(100vh-20px)] flex flex-col rounded-[7px] px-[10px] pt-[10px] ${animationClass}`}
+    >
+      {/* Back Button */}
+      <button
+        onClick={() =>navigateToHome()}
+        className="text-sm text-[#000000] opacity-70 mb-4 flex justify-start items-center"
+      >
+        <IoChevronBackOutline />
+        Home
+      </button>
 
-        {/* Editor */}
-        {note && (
-          <div className="mx-auto w-full custom_detail_page h-[calc(100vh-70px)]">
-            <ReactQuill
-              ref={quillRef}
-              value={noteHtml}
-              onChange={handleEditorChange}
-              placeholder="Edit your note..."
-              modules={modules}
-              formats={formats}
-              className="!rounded-[10px] h-full"
-            />
-          </div>
-        )}
-      </div>
+      {/* Editor */}
+      {note && (
+        <div className="mx-auto w-full custom_detail_page h-[calc(100vh-70px)]">
+          <ReactQuill
+            ref={quillRef}
+            value={noteHtml}
+            onChange={handleEditorChange}
+            placeholder="Edit your note..."
+            modules={modules}
+            formats={formats}
+            className="!rounded-[10px] h-full"
+          />
+        </div>
+      )}
     </div>
   );
 }

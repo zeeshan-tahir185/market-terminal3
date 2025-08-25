@@ -77,7 +77,7 @@ const SortableNote = ({ note }) => {
 
   const handleDragStart = () => {
     isDraggingRef.current = true;
-    clearTimeout(clickTimeout.current); // Cancel navigation on drag
+    clearTimeout(clickTimeout.current); 
   };
 
   const handleDragEnd = () => {
@@ -276,8 +276,7 @@ export default function BoardPage() {
   );
 
  return (
-  <div className="page-content">
-    <div className="md:w-[560px] min-h-[736px] p-5 m-2 flex flex-col gap-[21px] rounded-[7px] bg-white border border-[#E5E5E7]">
+    <div className="min-h-[736px] p-[14px] flex flex-col gap-[21px] ">
       {/* Search box */}
       <div className="flex items-center gap-[5px] text-[#000000] text-[13px]">
         <img src="/images/search.png" alt="" />
@@ -328,6 +327,5 @@ export default function BoardPage() {
         </DragOverlay>
       </DndContext>
     </div>
-  </div>
 );
 }

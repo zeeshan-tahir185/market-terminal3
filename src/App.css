@@ -15,7 +15,26 @@
 .custom_letter_space {
   letter-spacing: 0.1px;
 }
+/* Ensure the picker options are absolutely positioned relative to the button */
+.ql-picker-options {
+  position: absolute;
+  z-index: 1000; /* Ensure dropdown is above other elements */
+  width: auto;
+  white-space: nowrap;
+}
 
+/* Ensure the toolbar container allows for absolute positioning */
+.ql-toolbar.ql-snow {
+  position: relative;
+}
+
+/* Optional: Adjust dropdown styling for better appearance */
+.ql-picker-options {
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
 .notes_custom_shadow {
   box-shadow: 0px 0px 40px 0px rgba(162, 162, 162, 0.15);
 }
@@ -63,12 +82,16 @@
 
 .ql-editor {
   min-height: 40px;
+  border: 2px solis red;
   transition: min-height 0.3s ease;
   box-sizing: border-box;
+  /* padding-top: 0px !important; */
+  /* padding-bottom:0px !important ; */
 }
 
 .ql-editor::before {
-  margin-top: 6px;
+  padding: 0px !important;
+  margin-top: 3.5px;
   font-size: 13px;
   color: #9CA3AF !important;
   font-style: normal !important;
@@ -115,4 +138,35 @@
 .page-content {
   width: 100%;
   max-width: 560px; /* Matches your md:w-[560px] */
+}
+
+
+/* Transition for the note detail page sliding animation */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+.detail-page-enter {
+  animation: slideIn 0.5s forwards;
+}
+
+.detail-page-exit {
+  animation: slideOut 0.5s forwards;
 }
