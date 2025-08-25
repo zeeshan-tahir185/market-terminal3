@@ -3,11 +3,10 @@
 * {
   padding: 0px;
   margin: 0px;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   font-family: "Inter", sans-serif;
   word-wrap: break-word;
 }
-
 .textarea_box_shadow {
   box-shadow: 0px 0px 20px 0px rgba(170, 170, 170, 0.15);
 }
@@ -85,13 +84,12 @@
   border: 2px solis red;
   transition: min-height 0.3s ease;
   box-sizing: border-box;
-  /* padding-top: 0px !important; */
-  /* padding-bottom:0px !important ; */
+  padding-top: 0px !important;
+  padding-bottom:0px !important ;
 }
 
 .ql-editor::before {
-  padding: 0px !important;
-  margin-top: 3.5px;
+  margin-top: 3px;
   font-size: 13px;
   color: #9CA3AF !important;
   font-style: normal !important;
@@ -100,6 +98,13 @@
   color: #000000;
   opacity: 0.7;
 }
+.ql-editor p{
+margin-top: 5px;
+}
+.card_hover:hover  {
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15) !important;
+}
+
 
 .expanded .ql-editor {
   min-height: 119px !important;
@@ -160,7 +165,7 @@
   }
   100% {
     transform: translateX(100%);
-    opacity: 0;
+    opacity: 1;
   }
 }
 .detail-page-enter {
@@ -169,4 +174,31 @@
 
 .detail-page-exit {
   animation: slideOut 0.5s forwards;
+}
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -14px; /* Match your gap */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 14px; /* Match your gap */
+  background-clip: padding-box;
+}
+.my-masonry-grid_column > div {
+  margin-bottom: 14px; /* Match your gap */
+  height: auto !important; /* Ensure dynamic height */
+  min-height: 50px; /* Minimum height for small notes */
+}
+.notes_custom_shadow {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.card_hover:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.textarea_box_shadow {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.detail_custom_edditor .ql-toolbar::after{
+  display: none !important;
 }

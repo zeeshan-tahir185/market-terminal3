@@ -21,6 +21,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useNavigate } from "react-router-dom";
+import Masonry from "react-masonry-css";
 
 // Register custom font sizes
 const Size = Quill.import("attributors/style/size");
@@ -52,6 +53,8 @@ const SortableNote = ({ note }) => {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0 : 1, // Hide original during drag
+    height: 'auto', // Ensure height adjusts to content
+    minHeight: '50px', // Minimum height for small notes
   };
 
   const handleMouseDown = (e) => {
@@ -94,7 +97,7 @@ const SortableNote = ({ note }) => {
       onMouseUp={handleMouseUp}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      className="notes_custom_shadow rounded-xl p-[10px] shadow-sm bg-white border border-[#E3E3E880] flex flex-col gap-[25px] "
+      className="notes_custom_shadow rounded-xl p-[10px] shadow-sm bg-white border border-[#E3E3E880] card_hover flex flex-col gap-[25px]"
     >
       <div
         className="text-xs font-medium custom_letter_space"
@@ -275,8 +278,15 @@ export default function BoardPage() {
     n.html.toLowerCase().includes(query.toLowerCase())
   );
 
- return (
-    <div className="min-h-[736px] p-[14px] flex flex-col gap-[21px] ">
+  // Define breakpoints for masonry columns
+  const breakpointColumnsObj = {
+    default: 3, // 3 columns on desktop
+    1100: 2, // 2 columns on smaller screens
+    700: 1, // 1 column on mobile
+  };
+
+  return (
+    <div className="min-h-[736px] p-[14px] flex flex-col gap-[21px]">
       {/* Search box */}
       <div className="flex items-center gap-[5px] text-[#000000] text-[13px]">
         <img src="/images/search.png" alt="" />
@@ -305,7 +315,7 @@ export default function BoardPage() {
         />
       </div>
 
-      {/* Notes list with drag-and-drop */}
+      {/* Notes list with drag-and-drop and masonry layout */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -316,16 +326,20 @@ export default function BoardPage() {
           items={filteredNotes.map((n) => n.id)}
           strategy={rectSortingStrategy}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[14px]">
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {filteredNotes.map((note) => (
               <SortableNote key={note.id} note={note} />
             ))}
-          </div>
+          </Masonry>
         </SortableContext>
         <DragOverlay>
           {activeNote ? <OverlayNote note={activeNote} /> : null}
         </DragOverlay>
       </DndContext>
     </div>
-);
+  );
 }

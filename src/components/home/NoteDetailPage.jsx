@@ -80,7 +80,7 @@ let navigateToHome=()=>{
   setAnimationClass("detail-page-exit");
           setTimeout(() => {
             navigate("/");
-          }, 500);
+          }, 300);
 }
   // Detect page transitions and apply the animation
   useEffect(() => {
@@ -160,7 +160,7 @@ let navigateToHome=()=>{
 
       {/* Editor */}
       {note && (
-        <div className="mx-auto w-full custom_detail_page h-[calc(100vh-70px)]">
+        <div className="mx-auto w-full custom_detail_page h-[calc(100vh-70px)] detail_custom_edditor">
           <ReactQuill
             ref={quillRef}
             value={noteHtml}
