@@ -100,7 +100,7 @@ const SortableNote = ({ note }) => {
       className="notes_custom_shadow rounded-xl p-[10px] shadow-sm bg-white border border-[#E3E3E880] card_hover flex flex-col gap-[25px]"
     >
       <div
-        className="text-xs font-medium custom_letter_space"
+        className="text-xs font-medium custom_letter_space overflow-hidden !max-h-[343px] line-clamp-[20]"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(note.html) }}
       />
     </div>
@@ -112,7 +112,7 @@ const OverlayNote = ({ note }) => {
   return (
     <div className="notes_custom_shadow rounded-xl p-[10px] shadow-lg bg-white border border-[#E3E3E880] flex flex-col gap-[25px] transform scale-105">
       <div
-        className="text-xs font-medium custom_letter_space"
+        className="text-xs font-medium custom_letter_space overflow-hidden !max-h-[443px] line-clamp-[17] "
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(note.html) }}
       />
     </div>
